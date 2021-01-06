@@ -5,8 +5,10 @@ yarn-error.log
 
 /public/hot
 /public/storage
+/public/robots.txt
 
 /storage/*.key
+.env
 Homestead.json
 Homestead.yaml
 .phpunit.result.cache
