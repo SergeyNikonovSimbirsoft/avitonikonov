@@ -5,6 +5,7 @@ yarn-error.log
 
 /public/hot
 /public/storage
+/public/robots.txt
 
 /storage/*.key
 .env
@@ -14,4 +15,3 @@ Homestead.yaml
 
 .env.backup
 docker-compose.override.yml
-/public/
