@@ -30,4 +30,7 @@
     <li>
        RabbitMQ - <a href="http://127.0.0.1:15672/">http://127.0.0.1:15672/</a>
     </li>
+    <li>
+        Схема БД - <a href="https://app.dbdesigner.id?action=open&shared=public&uuid=15db9374-5f87-40a3-b025-563704b68999">https://app.dbdesigner.id?action=open&shared=public&uuid=15db9374-5f87-40a3-b025-563704b68999</a>
+    </li>
 </ul>
