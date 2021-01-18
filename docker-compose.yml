@@ -1,43 +1,53 @@
 version: '3'
-
 services:
-
-  web:
-    build: ./web
-    environment:
-      - APACHE_RUN_USER=#1000
-    volumes:
-      - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
-    ports:
-      - 8080:80
-    working_dir: ${APP_PATH_CONTAINER}
-
-  db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: 123456
-    volumes:
-      - ${DB_PATH_HOST}:/var/lib/postgres
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 6080:8080
-
-  composer:
-    image: composer:1.10
-    volumes:
-      - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
-    working_dir: ${APP_PATH_CONTAINER}
-    command: composer install
-
-  rabbitmq3:
-    image: rabbitmq:3-management
-    environment:
-      RABBITMQ_ERLANG_COOKIE: 'secret cookie here'
-    volumes:
-      - ${DB_PATH_HOST}:/var/lib/rabbitmq
-    ports:
-      - 15672:15672
+    app:
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        container_name: ${COMPOSE_PROJECT_NAME}_app
+        restart: always
+        volumes:
+          - ./:/var/www/
+        depends_on:
+          - db
+          - rabbitmq
+    db:
+        image: postgres:12-alpine
+        container_name: ${COMPOSE_PROJECT_NAME}_postgres
+        restart: always
+        environment:
+          - POSTGRES_PORT=${DB_PORT}
+          - POSTGRES_HOST=${DB_HOST}
+          - POSTGRES_DB=${DB_NAME}
+          - POSTGRES_USER=${DB_USER}
+          - POSTGRES_USERNAME=${DB_USER}
+          - POSTGRES_PASSWORD=${DB_PASSWORD}
+          - POSTGRES_HOST_AUTH_METHOD=trust
+          - PGDATA=/var/lib/postgresql/data/pgdata
+        volumes:
+            - ./database/postgres:/var/lib/postgresql/data/pgdata
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 6080:8080
+      links:
+        - db
+    nginx:
+      image: nginx:alpine
+      container_name: ${COMPOSE_PROJECT_NAME}_nginx
+      restart: always
+      ports:
+        - 8080:80
+      volumes:
+        - ./:/var/www
+        - ./containers/nginx:/etc/nginx/conf.d/
+    rabbitmq:
+      image: rabbitmq:3-management
+      container_name: ${COMPOSE_PROJECT_NAME}_rabbitmq
+      environment:
+        - RABBITMQ_DEFAULT_USER=guest
+        - RABBITMQ_DEFAULT_PASSWORD=guest
+        - RABBITMQ_DEFAULT_VHOST=/
+      ports:
+        - 15672:15672

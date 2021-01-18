@@ -1,0 +1,12 @@
+/.git*
+/.idea*
+.dockerignore
+.editorconfig
+vendor/
+bootstrap/cache
+!bootstrap/cache/.gitignore
+.phpstorm.meta.php
+Dockerfile
+docker-compose.yml
+Makefile
+node_modules/
