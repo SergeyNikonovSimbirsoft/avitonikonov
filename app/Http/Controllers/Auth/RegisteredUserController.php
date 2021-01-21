@@ -34,12 +34,20 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'surname' => 'max:255',
+            'patronymic' => 'max:255',
+            'convenient_time_for_calls' => 'max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
+            'phone' => 'required|string|max:255'
         ]);
 
         Auth::login($user = User::create([
             'name' => $request->name,
+            'surname' => $request->surname,
+            'patronymic' => $request->patronymic,
+            'convenient_time_for_calls' => $request->convenient_time_for_calls,
+            'phone' => $request->phone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]));

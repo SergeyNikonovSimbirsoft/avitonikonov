@@ -14,16 +14,44 @@
 
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="name" :value="__('Name*')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
 
+            <!-- Surname -->
+            <div class="mt-4">
+                <x-label for="surname" :value="__('Surname')" />
+
+                <x-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')" />
+            </div>
+
+            <!-- Patronymic -->
+            <div class="mt-4">
+                <x-label for="patronymic" :value="__('Patronymic')" />
+
+                <x-input id="patronymic" class="block mt-1 w-full" type="text" name="patronymic" :value="old('patronymic')" />
+            </div>
+
+            <!-- Convenient time for calls -->
+            <div class="mt-4">
+                <x-label for="convenient_time_for_calls" :value="__('Convenient time for calls')" />
+
+                <x-input id="convenient_time_for_calls" class="block mt-1 w-full" type="text" name="convenient_time_for_calls" :value="old('convenient_time_for_calls')" />
+            </div>
+
             <!-- Email Address -->
             <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="email" :value="__('Email*')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            </div>
+
+            <!-- Phone -->
+            <div class="mt-4">
+                <x-label for="phone" :value="__('Phone*')" />
+
+                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
             </div>
 
             <!-- Password -->
