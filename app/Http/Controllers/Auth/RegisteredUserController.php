@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Rules\Captcha;
 
 class RegisteredUserController extends Controller
 {
@@ -39,7 +40,8 @@ class RegisteredUserController extends Controller
             'convenient_time_for_calls' => 'max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
-            'phone' => 'required|string|max:255'
+            'phone' => 'required|string|max:255|unique:users',
+            'g-recaptcha-response' => new Captcha()
         ]);
 
         Auth::login($user = User::create([

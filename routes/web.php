@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route,
+    Illuminate\Http\Request,
+    Illuminate\Validation\Rule;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +23,27 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/settings', function () {
+    return view('settings', [
+        'user' => request()->user(),
+    ]);
+})->middleware(['auth', 'verified'])->name('settings');
+
 Route::get('/logout', function() {
     return view('welcome');
+});
+
+Route::post('/settings', function (Request $request) {
+    $request->validate([
+        'email' => ['required', 'email', Rule::unique('users', 'email')],
+    ]);
+
+    $user = $request->user();
+    $user->update([
+        'email' => $request->input('email')
+    ]);
+
+    return redirect()->back();
 });
 
 require __DIR__.'/auth.php';
