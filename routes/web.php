@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route,
 |
 */
 
+Route::get('/admin', function () {
+    return view('admin');
+})->middleware(['role:administrator']);
+
 Route::get('/', function () {
     return view('welcome');
 })->name("home");
@@ -29,7 +33,7 @@ Route::get('/settings', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('settings');
 
-Route::get('/logout', function() {
+Route::get('/logout', function () {
     return view('welcome');
 });
 
@@ -46,4 +50,4 @@ Route::post('/settings', function (Request $request) {
     return redirect()->back();
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
