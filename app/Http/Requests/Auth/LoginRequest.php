@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Rules\Captcha;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => 'required|string|email',
             'password' => 'required|string',
+            'g-recaptcha-response' => new Captcha()
         ];
     }
 
@@ -43,10 +45,14 @@ class LoginRequest extends FormRequest
      */
     public function authenticate()
     {
-        $this->ensureIsNotRateLimited();
+        //$this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('email', 'password'), $this->filled('remember'))) {
             RateLimiter::hit($this->throttleKey());
+
+            /*if (RateLimiter::tooManyAttempts($this->throttleKey(), 3)) {
+
+            }*/
 
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),

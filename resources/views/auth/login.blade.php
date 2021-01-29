@@ -11,7 +11,6 @@
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -32,9 +31,9 @@
                                 required autocomplete="current-password" />
             </div>
 
-            <!--<div class="mt-4">
+            <div class="mt-4">
                 <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
-            </div>-->
+            </div>
 
             <!-- Remember Me -->
             <div class="block mt-4">
