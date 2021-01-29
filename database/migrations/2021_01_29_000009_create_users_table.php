@@ -15,6 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
+            $table->integer('status_id')->unsigned();
             $table->string('name');
             $table->string('surname')->nullable();
             $table->string('patronymic')->nullable();
@@ -24,8 +27,11 @@ class CreateUsersTable extends Migration
             $table->string('convenient_time_for_calls')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+
+            $table->foreign('status_id')
+                ->references('id')
+                ->on('user_statuses')
+                ->onDelete('cascade');
         });
     }
 
