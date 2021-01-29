@@ -28,7 +28,8 @@ class UserTableSeeder extends Seeder
         $user1 = new User();
         $user1->created_at = Carbon::now();
         $user1->updated_at = Carbon::now();
-        $user1->status_id = 3;
+        $user1->email_verified_at = Carbon::now();
+        $user1->status_id = 2;
         $user1->name = "admin";
         $user1->surname = "";
         $user1->patronymic = "";
