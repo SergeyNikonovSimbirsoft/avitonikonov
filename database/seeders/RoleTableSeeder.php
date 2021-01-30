@@ -15,23 +15,18 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = new Role();
-        $user->created_at = Carbon::now();
-        $user->updated_at = Carbon::now();
-        $user->name = 'User';
-        $user->slug = 'user';
-        $user->save();
-        $moderator = new Role();
-        $moderator->created_at = Carbon::now();
-        $moderator->updated_at = Carbon::now();
-        $moderator->name = 'Moderator';
-        $moderator->slug = 'moderator';
-        $moderator->save();
-        $administrator = new Role();
-        $administrator->created_at = Carbon::now();
-        $administrator->updated_at = Carbon::now();
-        $administrator->name = 'Administrator';
-        $administrator->slug = 'administrator';
-        $administrator->save();
+        $roles = [
+            'user' => 'User',
+            'moderator' => 'Moderator',
+            'administrator' => 'Administrator'
+        ];
+        foreach ($roles as $role_slug => $role_name) {
+            $role = new Role();
+            $role->created_at = Carbon::now();
+            $role->updated_at = Carbon::now();
+            $role->name = $role_name;
+            $role->slug = $role_slug;
+            $role->save();
+        }
     }
 }

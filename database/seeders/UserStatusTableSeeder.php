@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\Status;
 
 class UserStatusTableSeeder extends Seeder
 {
@@ -20,13 +20,13 @@ class UserStatusTableSeeder extends Seeder
             "active" => "Active",
             "waiting" => "Waiting for email activation"
         ];
-        foreach ($statuses as $slug => $status) {
-            DB::table('user_statuses')->insert([
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-                'name' => $status,
-                'slug' => $slug
-            ]);
+        foreach ($statuses as $status_slug => $status_name) {
+            $status = new Status();
+            $status->created_at = Carbon::now();
+            $status->updated_at = Carbon::now();
+            $status->name = $status_name;
+            $status->slug = $status_slug;
+            $status->save();
         }
     }
 }

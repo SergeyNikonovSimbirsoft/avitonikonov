@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
+use App\Models\Status;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +47,10 @@ class RegisteredUserController extends Controller
             'g-recaptcha-response' => new Captcha()
         ]);
 
-        Auth::login($user = User::create([
+        $user = User::create([
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'status_id' => (int)Status::where('slug', 'waiting')->first()['id'],
             'name' => $request->name,
             'surname' => $request->surname,
             'patronymic' => $request->patronymic,
@@ -52,7 +58,12 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]));
+        ]);
+
+        $roleUser = Role::where('slug', 'user')->first();
+        $user->roles()->attach($roleUser);
+
+        Auth::login($user);
 
         event(new Registered($user));
 

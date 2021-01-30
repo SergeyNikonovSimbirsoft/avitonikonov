@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route,
 
 Route::get('/admin', function () {
     return view('admin');
-})->middleware(['role:administrator']);
+})->middleware(['role:administrator', 'auth']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,27 +27,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/settings', function () {
-    return view('settings', [
-        'user' => request()->user(),
-    ]);
-})->middleware(['auth', 'verified'])->name('settings');
-
-Route::get('/logout', function () {
-    return view('welcome');
-});
-
-Route::post('/settings', function (Request $request) {
-    $request->validate([
-        'email' => ['required', 'email', Rule::unique('users', 'email')],
-    ]);
-
-    $user = $request->user();
-    $user->update([
-        'email' => $request->input('email')
-    ]);
-
-    return redirect()->back();
-});
+Route::get('/admin', function () {
+    return view('admin');
+})->middleware(['role:administrator', 'auth', 'verified'])->name('admin');
 
 require __DIR__ . '/auth.php';
