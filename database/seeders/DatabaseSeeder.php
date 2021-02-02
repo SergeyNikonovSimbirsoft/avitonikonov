@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             PermissionTableSeeder::class,
             RolesPermissionsTableSeeder::class,
-            UserTableSeeder::class
+            UserTableSeeder::class,
+            CategoriesTableSeeder::class
         ]);
     }
 }

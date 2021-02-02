@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route,
-    Illuminate\Http\Request,
-    Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Profile\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +22,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name("home");
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/profile', [ProfileController::class, 'showView'])->middleware(['auth', 'verified'])->name('profile');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::get('/admin', function () {
     return view('admin');
