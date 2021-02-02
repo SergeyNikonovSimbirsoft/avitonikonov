@@ -1,48 +1,37 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.main')
+@section("content")
+    <div class="register-login-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="login-form">
+                        <h2>Reset password</h2>
+                        <form method="POST" action="{{ route('password.update') }}">
+                            @csrf
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                            <x-validation-errors :errors="$errors" />
 
-        <form method="POST" action="{{ route('password.update') }}">
-            @csrf
+                            <!-- Password Reset Token -->
+                            <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-            <!-- Password Reset Token -->
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                            <div class="group-input">
+                                <label for="email">Email *</label>
+                                <x-input type="email" id="email" name="email" :value="old('email', $request->email)" required autofocus placeholder="Email *"/>
+                            </div>
+                            <div class="group-input">
+                                <label for="password">Password *</label>
+                                <input type="password" id="password" name="password" required placeholder="Password *">
+                            </div>
+                            <div class="group-input">
+                                <label for="password_confirmation">Confirm password *</label>
+                                <input type="password" id="password_confirmation" name="password_confirmation" required placeholder="Confirm password *">
+                            </div>
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+                            <button type="submit" class="site-btn login-btn">Reset Password</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                    type="password"
-                                    name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        </div>
+    </div>
+@endsection

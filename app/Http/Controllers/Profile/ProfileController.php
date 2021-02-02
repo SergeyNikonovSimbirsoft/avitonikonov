@@ -11,7 +11,7 @@ class ProfileController extends Controller
 {
     public function showView()
     {
-        return view('profile', [
+        return view('personal.profile', [
             'user' => User::find(Auth::user()->id)
         ]);
     }
@@ -36,8 +36,6 @@ class ProfileController extends Controller
         ]);
         $user->save();
 
-        session()->flash('success', 'User updated successfully');
-
-        return redirect()->back();
+        return redirect()->back()->with('status', 'User updated successfully');
     }
 }
