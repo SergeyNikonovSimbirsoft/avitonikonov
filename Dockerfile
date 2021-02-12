@@ -21,6 +21,7 @@ RUN docker-php-ext-install pdo_pgsql mbstring exif pcntl bcmath gd sockets
 WORKDIR /var/www
 ADD . /var/www
 RUN chown -R www-data:www-data /var/www
+RUN chmod -R 777 /var/www/storage
 USER root
 
 CMD composer install\
