@@ -1,6 +1,6 @@
 @extends('layouts.profile')
 @section('content')
-    <x-breadcrumb></x-breadcrumb>
+    {{Breadcrumbs::render('personal')}}
     <section>
         <div class="container">
             <div class="row">

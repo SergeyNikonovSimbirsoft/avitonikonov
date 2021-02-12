@@ -24,11 +24,11 @@ class UserTableSeeder extends Seeder
         $user1->updated_at = Carbon::now();
         $user1->email_verified_at = Carbon::now();
         $user1->status_id = 2;
-        $user1->name = "admin";
-        $user1->surname = "";
-        $user1->patronymic = "";
-        $user1->email = "admin@admin.com";
-        $user1->phone = "88888888888";
+        $user1->name = 'admin';
+        $user1->surname = '';
+        $user1->patronymic = '';
+        $user1->email = 'admin@admin.com';
+        $user1->phone = '88888888888';
         $user1->password = bcrypt('admin');
         $user1->save();
         $user1->roles()->attach($admin);

@@ -1,8 +1,6 @@
 @extends('layouts.profile')
 @section('content')
-    <x-breadcrumb>
-        Admin
-    </x-breadcrumb>
+    {{Breadcrumbs::render('personal', 'Admin')}}
     <section>
         <div class="container">
             <div class="row">

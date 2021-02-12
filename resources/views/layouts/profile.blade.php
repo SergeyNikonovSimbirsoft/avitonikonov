@@ -68,6 +68,9 @@
                 <div class="container">
                     <nav class="nav-menu mobile-menu">
                         <ul>
+                            <x-nav-li :href="route('main')">
+                                <a href="{{ route('main') }}">Home</a>
+                            </x-nav-li>
                             <x-nav-li :href="route('personal.profile')" :active="request()->routeIs('personal.profile')">
                                 <a href="{{ route('personal.profile') }}">Profile</a>
                             </x-nav-li>
@@ -85,18 +88,5 @@
 
         @yield('content')
 
-        <footer class="footer-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="footer-left">
-                            <div class="footer-logo">
-                                <a href="{{ route('main') }}"><img src="/img/logo.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </body>
 </html>

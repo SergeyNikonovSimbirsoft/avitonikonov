@@ -21,7 +21,7 @@ class CreateModerationsTable extends Migration
             $table->integer('ads_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('resolution_id')->unsigned();
-            $table->string("reason")->nullable();
+            $table->string('reason')->nullable();
 
             $table->foreign('ads_id')
                 ->references('id')

@@ -16,9 +16,9 @@ class UserStatusTableSeeder extends Seeder
     public function run()
     {
         $statuses = [
-            "block" => "Blocked",
-            "active" => "Active",
-            "waiting" => "Waiting for email activation"
+            'block' => 'Blocked',
+            'active' => 'Active',
+            'waiting' => 'Waiting for email activation'
         ];
         foreach ($statuses as $status_slug => $status_name) {
             $status = new Status();

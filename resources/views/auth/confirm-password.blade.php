@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section("content")
+@section('content')
     <div class="register-login-section spad">
         <div class="container">
             <div class="row">

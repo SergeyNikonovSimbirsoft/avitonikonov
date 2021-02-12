@@ -75,22 +75,14 @@
                     </div>
                 </div>
             </div>
+            <div class="nav-item">
+                <div class="container">
+                    @include('layouts.menus.top_categories')
+                    @include('layouts.menus.top_menu')
+                </div>
+            </div>
         </header>
 
         @yield('content')
-
-        <footer class="footer-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="footer-left">
-                            <div class="footer-logo">
-                                <a href="{{ route('main') }}"><img src="/img/logo.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </body>
 </html>

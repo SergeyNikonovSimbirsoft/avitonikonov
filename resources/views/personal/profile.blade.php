@@ -1,8 +1,6 @@
 @extends('layouts.profile')
-@section("content")
-    <x-breadcrumb>
-        Profile
-    </x-breadcrumb>
+@section('content')
+    {{Breadcrumbs::render('personal', 'Profile')}}
     <div class="register-login-section spad">
         <div class="container">
             <div class="row">
